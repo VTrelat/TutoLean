@@ -8,9 +8,9 @@ inductive Lst (α : Type) where
 namespace Lst
 variable {α : Type}
 
-def snoc : Lst α → α → Lst α
+def concat : Lst α → α → Lst α
   | nil, a => cons a nil
-  | cons x v, a => cons x (snoc v a)
+  | cons x v, a => cons x (concat v a)
 
 @[simp]
 def append : Lst α → Lst α → Lst α
@@ -22,7 +22,7 @@ def append : Lst α → Lst α → Lst α
 @[simp]
 def rev : Lst α → Lst α
   | nil => nil
-  | cons a v => snoc (Lst.rev v) a
+  | cons a v => concat (Lst.rev v) a
 
 def size : Lst α → Nat
   | nil => 0

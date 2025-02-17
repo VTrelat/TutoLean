@@ -9,11 +9,11 @@ namespace Lst
 
 @[simp] theorem append_is_append {u : Lst α} {v : Lst α} : (u ++ v) = u.append v := rfl
 
-theorem snoc_eq_append (v : Lst α) (a : α) : snoc v a = v ++ (cons a nil) := by
+theorem concat_eq_append (v : Lst α) (a : α) : concat v a = v ++ (cons a nil) := by
   induction v with
   | nil => rfl
   | cons x v ih =>
-    rw [snoc, ih]
+    rw [concat, ih]
     congr
 
 theorem append_assoc (u v w : Lst α) : u ++ (v ++ w) = u ++ v ++ w  := by
@@ -38,7 +38,7 @@ theorem rev_append {u : Lst α} {v : Lst α} : (u ++ v).rev = v.rev ++ u.rev := 
     dsimp
   | cons x u ih =>
     dsimp at ih ⊢
-    rw [ih, snoc_eq_append, snoc_eq_append]
+    rw [ih, concat_eq_append, concat_eq_append]
     dsimp [← append_is_append]
     rw [← append_assoc]
 
@@ -46,7 +46,7 @@ theorem rev_rev {v : Lst α} : v.rev.rev = v := by
   induction v with
   | nil => rfl
   | cons x v ih =>
-    rw [rev, snoc_eq_append, rev_append, ih, rev, snoc_eq_append]
+    rw [rev, concat_eq_append, rev_append, ih, rev, concat_eq_append]
     dsimp
 
 @[simp]
