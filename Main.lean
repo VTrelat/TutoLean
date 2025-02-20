@@ -1,9 +1,11 @@
 import Tuto.Extra
 open Lst Chr
 
+-- def pf_irrel : ∀ thm : Prop, ∀ (pf₁ pf₂ : thm), pf₁ = pf₂ := λ _ _ _ => rfl
+
 /--
-`alternate u v h` takes two lists `u` and `v` of the same length, given
-by `h`, and returns a list containing the elements of `u` and `v` alternatingly.
+`alternate` takes two lists `u` and `v` of the same length (given by `h`),
+and returns a list containing the elements of `u` and `v` alternatingly.
 -/
 def alternate {α} (u v : Lst α) (h : u.size = v.size) : Lst α :=
   match u, v, h with
